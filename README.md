@@ -2,9 +2,9 @@
      width="30%"
      style="padding: 10px">
 
-# << Batalha Naval POO >>
+#  Batalha Naval POO 
 
-## << Projeto de um jogo de batalha naval feito com programação orientada a objeto >>
+##  Projeto de um jogo de batalha naval feito com programação orientada a objeto 
 
 > Repositório destinado para o desenvolvimento do projeto final da discipliana PRG22107 - Programação orienta a objeto. 
 > 
