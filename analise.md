@@ -16,14 +16,14 @@ O objetivo é afundar todos os navios do adversário antes que os seus sejam afu
 O sistema será responsável por:
 1) Gerenciar os tabuleiros de cada jogador.
 2) Posicionar os navios.
-3) Registrar e avaliar os tiros.
+3) Registrar e avaliar os ataques.
 4) Determinar o vencedor ao final do jogo.
 
 ### Requisitos Funcionais
 1) Permitir que cada jogador posicione seus navios no tabuleiro.
-2) Registrar as coordenadas dos tiros realizados por cada jogador.
-3) Informar se um tiro foi um acerto, erro ou afundou um navio.
-4) Indicar o estado atual do jogo, como navios restantes e posição de tiros já realizados.
+2) Registrar as coordenadas dos ataques realizados por cada jogador.
+3) Informar se um ataque foi um acerto, erro ou afundou um navio.
+4) Indicar o estado atual do jogo, como navios restantes e posição de ataques já realizados.
 5) Determinar e declarar o vencedor ao final do jogo.
 
 ### Requisitos Não-Funcionais
@@ -37,14 +37,14 @@ O sistema será responsável por:
 Aqui estão os principais casos de uso e os atores envolvidos:
 
 ### Atores:
-1) Jogador: Interage com o sistema para posicionar navios e realizar tiros.
+1) Jogador: Interage com o sistema para posicionar navios e realizar ataques.
 2) Sistema: Gerencia a lógica do jogo.
 
 ### Casos de Uso:
 1) Posicionar Navio: O jogador define as posições dos navios no tabuleiro.
-2) Realizar Tiro: O jogador escolhe uma coordenada para atacar o tabuleiro do oponente.
-3) Avaliar Tiro: O sistema verifica se o tiro foi um acerto, erro ou afundou um navio.
-4) Exibir Estado Atual do Jogo: O sistema mostra os navios restantes e os tiros já realizados.
+2) Realizar Ataque: O jogador escolhe uma coordenada para atacar o tabuleiro do oponente.
+3) Avaliar Ataque: O sistema verifica se o tiro foi um acerto, erro ou afundou um navio.
+4) Exibir Estado Atual do Jogo: O sistema mostra os navios restantes e os ataques já realizados.
 5) Declarar Vencedor: O sistema determina e declara o vencedor quando todos os navios de um jogador forem afundados.
 
  
@@ -55,12 +55,12 @@ O diagrama de domínio conceitual identifica os principais elementos e suas rela
 ### Entidades Principais:
 1) Tabuleiro: Representa a grade de jogo de cada jogador.
 2) Navio: Representa os navios posicionados nos tabuleiros.
-3) Jogador: Controla um tabuleiro e realiza tiros.
+3) Jogador: Controla um tabuleiro e realiza ataques.
 4) Tiro: Representa um ataque a uma coordenada do tabuleiro.
 5) Jogo: Gerencia a interação entre os jogadores.
 ### Relações:
-1) Um Jogador possui um Tabuleiro e pode realizar múltiplos Tiros.
-2) Um Tabuleiro contém múltiplos Navios e registra o histórico de Tiros.
+1) Um Jogador possui um Tabuleiro e pode realizar múltiplos Ataques.
+2) Um Tabuleiro contém múltiplos Navios e registra o histórico de Ataques.
 3) Um Navio ocupa várias posições no Tabuleiro.
 4) O Jogo organiza a sequência de turnos entre os dois Jogadores.
 
