@@ -1,5 +1,9 @@
 # Projeto orientado a objeto
 
+<img src="imagens/diagrama_de_classe.png"
+     width="30%"
+     style="padding: 10px">
+
 >[!NOTE]
 >O **Projeto orientado a objeto** é composto pelas documentação do projeto descrito em UML. Deve incluir um Diagrama de Classes do sistema projetado, e pelo menos um diagrama de interação de um dos casos de uso. Outros diagramas podem ser apresentados, caso julgue necessário.
 
