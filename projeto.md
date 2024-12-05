@@ -1,7 +1,7 @@
 # Projeto orientado a objeto
 
 <img src="imagens/diagrama_de_classe.png"
-     width="30%"
+     width="100%"
      style="padding: 10px">
 
 >[!NOTE]
