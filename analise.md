@@ -50,13 +50,13 @@ Aqui estão os principais casos de uso e os atores envolvidos:
  
 ## Diagrama de Domínio do problema
 
-O diagrama de domínio conceitual identifica os principais elementos e suas relações. Aqui está uma descrição textual para você implementar graficamente:
+O diagrama de domínio conceitual identifica os principais elementos e suas relações. Aqui está uma descrição textual para implementar graficamente:
 
 ### Entidades Principais:
 1) Tabuleiro: Representa a grade de jogo de cada jogador.
 2) Navio: Representa os navios posicionados nos tabuleiros.
 3) Jogador: Controla um tabuleiro e realiza ataques.
-4) Tiro: Representa um ataque a uma coordenada do tabuleiro.
+4) Ataque: Representa um ataque a uma coordenada do tabuleiro.
 5) Jogo: Gerencia a interação entre os jogadores.
 ### Relações:
 1) Um Jogador possui um Tabuleiro e pode realizar múltiplos Ataques.
