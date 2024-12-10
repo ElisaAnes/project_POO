@@ -1,8 +1,9 @@
 # Projeto orientado a objeto
 
-<img src="imagens/diagrama_de_classe.png"
+<img src="imagens/diagrama_classe2.png"
      width="100%"
      style="padding: 10px">
+
 ## Classe Servidor
 Responsabilidade: Gerenciar as conexões entre os dois jogadores e distribuir as jogadas entre eles.
 ### Atributos:
