@@ -23,32 +23,44 @@ conectar(): Conecta o cliente ao servidor.
 lerDados(): Recebe e processa dados do servidor.
 dispararJogada(): Envia as jogadas ao servidor.
 
+## Classe Jogo
+Responsabilidade: Controlar o fluxo geral do jogo.
+### Atributos:
+turno: informações sobre o número de turnos, e jogador da vez.
+### Métodos:
+iniciar(): Inicia o jogo, configurando jogadores e tabuleiros.
+verificarVencedor(): Verifica se há um vencedor (chamando métodos dos jogadores ou tabuleiros para verificar o estado dos navios).
+
+## Classe Jogador
+Responsabilidade: Representar um jogador no jogo, contendo as ações específicas de um jogador.
+### Atributos:
+nome: string: Nome do jogador.
+tabuleiro: Tabuleiro: associar o tabuleiro de cada jogador.
+### Métodos:
+posicionarNavio(): Permite ao jogador posicionar seus navios no tabuleiro.
+realizarAtaque(): Realiza um ataque em uma posição do tabuleiro adversário.
+
 ## Classe Tabuleiro
 Responsabilidade: Representa o tabuleiro de um jogador, armazenando os navios e os tiros disparados.
 ### Atributos:
-navios: Um vetor de objetos Navio, representando os navios no tabuleiro.
-tiros: Um vetor de objetos Posicao, representando os locais onde os tiros foram disparados.
+navios: QVector: Vetor que armazena os navios posicionados no tabuleiro.
+tiros: QVector: Vetor que armazena os tiros disparados no tabuleiro.
 ### Métodos:
-adicionarNavio(): Adiciona um navio no tabuleiro.
-disparar(): Processa o tiro disparado e verifica se atingiu um navio.
-todosNaviosAfundados(): Verifica se todos os navios foram afundados.
+navioAfundado(): Verifica se um navio específico foi afundado.
+todosNaviosAfundados(): Verifica se todos os navios no tabuleiro estão afundados.
+navioAtingido(): Verifica se um tiro acertou um navio.
+foiAtacado(): verifica se um local do tabuleiro já foi atacado.
 
 ## Classe Navio:
-Responsabilidade: Representa um navio, com suas posições ocupadas e a verificação de acertos.
+Responsabilidade: Representar os navios no tabuleiro, controlando seu estado (atingido ou não).
 ### Atributos:
 tamanho: Número de células ocupadas pelo navio.
-posicoes: Um vetor de objetos Posicao, representando as posições ocupadas pelo navio.
-acertos: Contador dos acertos sofridos pelo navio.
+posicao: QVector: Vetor que armazena as coordenadas ocupadas pelo navio.
+acertos: int: Número de vezes que o navio foi atingido.
 ### Métodos:
-foiAtingido(): Verifica se o navio foi atingido em uma determinada posição.
-estaAfundado(): Verifica se o navio está afundado (se o número de acertos for igual ao tamanho do navio).
+foiAtingido(): Marca o navio como atingido em uma posição.
+estaAfundado(): Verifica se o navio está afundado (quando o número de acertos for igual ao tamanho).
 
-## Classe Posicao:
-Responsabilidade: Representa uma posição no tabuleiro (coordenada x, y).
-### Atributos:
-x e y: Coordenadas no tabuleiro.
-### Métodos:
-equals(): Verifica se duas posições são iguais.
 
 ## Observações:
 - A classe Servidor tem uma relação de dependência com a classe Cliente através do uso de QTcpSocket para enviar e receber dados entre os jogadores.
