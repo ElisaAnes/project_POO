@@ -1,6 +1,6 @@
 # Projeto orientado a objeto
 
-<img src="imagens/class_diagram_3.png"
+<img src="imagens/class_diagram_3.jpg"
      width="100%"
      style="padding: 10px">
 
