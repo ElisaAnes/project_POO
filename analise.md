@@ -37,16 +37,16 @@ O sistema será responsável por:
 Aqui estão os principais casos de uso e os atores envolvidos:
 
 ### Atores:
-1) Jogador: Interage com o sistema para posicionar navios e realizar ataques.
-2) Sistema: Gerencia a lógica do jogo.
+1) Jogador1 e Jogador2: Interage com o sistema para posicionar navios e realizar ataques.
+2) Sistema: Altera os rounds e declara o fim do jogo.
 
 ### Casos de Uso:
 1) Posicionar Navio: O jogador define as posições dos navios no tabuleiro.
 2) Realizar Ataque: O jogador escolhe uma coordenada para atacar o tabuleiro do oponente.
-3) Avaliar Ataque: O sistema verifica se o tiro foi um acerto, erro ou afundou um navio.
-4) Exibir Estado Atual do Jogo: O sistema mostra os navios restantes e os ataques já realizados.
-5) Declarar Vencedor: O sistema determina e declara o vencedor quando todos os navios de um jogador forem afundados.
+3) Avaliar Ataque: O sistema verifica se o tiro foi um acerto ou não e altera o round.
+4) Fim de jogo: O sistema determina e declara o vencedor quando todos os navios de um jogador forem afundados.
 
+![Batalha Naval (2)](https://github.com/user-attachments/assets/aaed9888-226d-4dfd-90fa-19463fe52a7d)
  
 ## Diagrama de Domínio do problema
 
