@@ -14,7 +14,7 @@ void Peca::keyPressEvent(QKeyEvent *event) {
         }
         break;
     case Qt::Key_Down:
-        if (currentRow < 9) {
+        if (currentRow < 10) {
             currentRow++;
         }
         break;
@@ -24,7 +24,7 @@ void Peca::keyPressEvent(QKeyEvent *event) {
         }
         break;
     case Qt::Key_Right:
-        if (currentCol < 10) {
+        if (currentCol < 9) {
             currentCol++;
         }
         break;
@@ -42,14 +42,14 @@ void Peca::rotatePiece() {
     if (isVertical) {
         // Rotaciona para a orientação horizontal
         setFixedSize(80, 20);
-        // Conecta a peça ao layout para atualizar visualmente
-
     } else {
         // Rotaciona para a orientação vertical
         setFixedSize(20, 80);
-
     }
     isVertical = !isVertical; // Alterna o estado de orientação
 }
 
-
+// Método para retornar se a peça está vertical ou não
+bool Peca::isPieceVertical() const {
+    return isVertical;
+}
