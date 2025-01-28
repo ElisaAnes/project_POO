@@ -3,44 +3,53 @@
 Peca::Peca(QWidget *parent) : QPushButton(parent) {
     setFixedSize(80, 20); // Define o tamanho inicial da peça
     setStyleSheet("background-color: blue; color: white; border-radius: 10px;"); // Estilo da peça
-    setCursor(Qt::OpenHandCursor); // Cursor de mão aberta ao passar o mouse
+    setFocusPolicy(Qt::StrongFocus); // Permite que o widget receba eventos de teclado
 }
 
-void Peca::mousePressEvent(QMouseEvent *event) {
-    if (event->button() == Qt::LeftButton) {
-        // Inicia o arraste
-        dragging = true;
-        dragStartPos = event->globalPosition().toPoint();
-        setCursor(Qt::ClosedHandCursor); // Cursor de mão fechada
-    } else if (event->button() == Qt::RightButton) {
-        // Rotaciona a peça ao clicar com o botão direito
-        rotatePiece();
+void Peca::keyPressEvent(QKeyEvent *event) {
+    switch (event->key()) {
+    case Qt::Key_Up:
+        if (currentRow > 1) {
+            currentRow--;
+        }
+        break;
+    case Qt::Key_Down:
+        if (currentRow < 9) {
+            currentRow++;
+        }
+        break;
+    case Qt::Key_Left:
+        if (currentCol > 1) {
+            currentCol--;
+        }
+        break;
+    case Qt::Key_Right:
+        if (currentCol < 10) {
+            currentCol++;
+        }
+        break;
+    case Qt::Key_R:
+        rotatePiece(); // Rotaciona a peça
+        break;
+    default:
+        QPushButton::keyPressEvent(event); // Passa o evento para o botão base
+        return;
     }
-}
-
-void Peca::mouseMoveEvent(QMouseEvent *event) {
-    if (dragging) {
-        // Calcula o deslocamento do mouse
-        QPoint offset = event->globalPosition().toPoint() - dragStartPos;
-        move(pos() + offset); // Move a peça para a nova posição
-        dragStartPos = event->globalPosition().toPoint(); // Atualiza a posição inicial do mouse
-    }
-}
-
-void Peca::mouseReleaseEvent(QMouseEvent *event) {
-    if (dragging && event->button() == Qt::LeftButton) {
-        dragging = false; // Finaliza o arraste
-        setCursor(Qt::OpenHandCursor); // Volta para o cursor de mão aberta
-    }
+    emit clicked(); // Atualiza a posição no layout
 }
 
 void Peca::rotatePiece() {
     if (isVertical) {
         // Rotaciona para a orientação horizontal
         setFixedSize(80, 20);
+        // Conecta a peça ao layout para atualizar visualmente
+
     } else {
         // Rotaciona para a orientação vertical
         setFixedSize(20, 80);
+
     }
     isVertical = !isVertical; // Alterna o estado de orientação
 }
+
+
