@@ -15,16 +15,21 @@ public:
     int getCol() const { return currentCol; }
     void setPosition(int row, int col) { currentRow = row; currentCol = col; }
 
+    // Retorna se a peça está vertical ou não
+    bool isPieceVertical() const;
+
+
+    bool isVerticalPiece() const { return isVertical; } // Método para saber se a peça está em modo vertical
+
 protected:
     int currentRow = 7; // Linha inicial
     int currentCol = 7; // Coluna inicial
-    bool isVertical = false; // Indica a orientação da peça (horizontal ou vertical)
+    bool isVertical = false; // Indica a orientação da peça
 
-    void keyPressEvent(QKeyEvent *event) override; // Evento para capturar teclas
+    void keyPressEvent(QKeyEvent *event) override;
 
 private:
-    void rotatePiece(); // Método para rotacionar a peça
+    void rotatePiece();
 };
-
 
 #endif // PECA_H
