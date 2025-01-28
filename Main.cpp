@@ -46,7 +46,12 @@ public:
         peca->lower(); // Garante que a peça fique abaixo dos botões
 
         connect(peca, &QPushButton::clicked, this, [layout, peca]() {
-            layout->addWidget(peca, peca->getRow(), peca->getCol(), 1, 2);
+            if (peca->isPieceVertical()) {
+                layout->addWidget(peca, peca->getRow(), peca->getCol(), 2, 1);
+            } else {
+                layout->addWidget(peca, peca->getRow(), peca->getCol(), 1, 2);
+            }
+
         });
 
         setLayout(layout);
