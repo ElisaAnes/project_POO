@@ -42,10 +42,18 @@ public:
         }
 
         // Cria uma peça para o tabuleiro
-        QPushButton *peca = new QPushButton("Cruzador", this); // Adiciona um ícone ou texto na peça
-        peca->setFixedSize(100, 40); // Define o tamanho da peça
-        peca->setStyleSheet("background-color: darkblue; color: white; border-radius: 10px;"); // Estilo da peça
-        layout->addWidget(peca, 4, 5, 1, 2); // Posiciona a peça no tabuleiro (linha 5, coluna 5) ocupando 2 colunas
+        QPushButton *peca = new QPushButton("", this); // Adiciona um ícone ou texto na peça
+        peca->setFixedSize(80, 20); // Define o tamanho da peça
+        peca->setStyleSheet("background-color: blue; color: white; border-radius: 10px;"); // Estilo da peça
+        layout->addWidget(peca, 5, 5, 1, 2); // Posiciona a peça no tabuleiro (linha 5, coluna 5) ocupando 2 colunas
+        peca->lower(); // Garante que a peça fique abaixo dos botões
+
+        // Cria uma peça para o tabuleiro
+        QPushButton *peca2 = new QPushButton("", this); // Adiciona um ícone ou texto na peça
+        peca2->setFixedSize(140, 20); // Define o tamanho da peça
+        peca2->setStyleSheet("background-color: red; color: white; border-radius: 10px;"); // Estilo da peça
+        layout->addWidget(peca2, 4, 4, 1, 3); // Posiciona a peça no tabuleiro (linha 5, coluna 5) ocupando 2 colunas
+        peca2->lower(); // Garante que a peça fique abaixo dos botões
 
 
         // Define o layout criado para o widget principal
