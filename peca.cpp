@@ -23,8 +23,18 @@ void Peca::toggleLock() {
         char coluna = 'A' + (currentCol - 1);
         int linha = currentRow;
 
+        // Declara variáveis antes do if para estarem acessíveis após ele
+        char coluna2 = coluna;
+        int linha2 = linha;
+
+        if (isPieceVertical() == true) {
+            linha2 = currentRow + 1;
+        }else{
+            coluna2= coluna + 1;
+        }
+
         // Exibe a posição da peça no terminal
-        qDebug() << "Peça travada na posição: (" << coluna << "," << linha << ")";
+        qDebug() << "Peça travada nas posições: (" << coluna << "," << linha << ") e (" << coluna2 << "," << linha2 << ")";
     } else {
         setStyleSheet("background-color: blue; color: white; border-radius: 10px;");
     }
