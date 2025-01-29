@@ -18,6 +18,13 @@ void Peca::toggleLock() {
     // Atualiza a cor da peça para indicar o estado (azul = movível, vermelho = travado)
     if (locked) {
         setStyleSheet("background-color: red; color: white; border-radius: 10px;");
+
+        // Converte o número da coluna para uma letra (A-J)
+        char coluna = 'A' + (currentCol - 1);
+        int linha = currentRow;
+
+        // Exibe a posição da peça no terminal
+        qDebug() << "Peça travada na posição: (" << coluna << "," << linha << ")";
     } else {
         setStyleSheet("background-color: blue; color: white; border-radius: 10px;");
     }
