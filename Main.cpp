@@ -18,7 +18,8 @@ int main(int argc, char *argv[]) {
     // Conectamos os sinais e slots para sincronizar os cliques
     QObject::connect(&tabuleiro1, &Tabuleiro::buttonClicked, &tabuleiro2, &Tabuleiro::marcarBotao);
     QObject::connect(&tabuleiro2, &Tabuleiro::buttonClicked, &tabuleiro1, &Tabuleiro::marcarBotao);
-
+    QObject::connect(&tabuleiro2, &Tabuleiro::buttonClicked, &tabuleiro2, &Tabuleiro::marcarProprio);
+    QObject::connect(&tabuleiro1, &Tabuleiro::buttonClicked, &tabuleiro1, &Tabuleiro::marcarProprio);
 
     // Exibir os tabuleiros
     tabuleiro1.show();
