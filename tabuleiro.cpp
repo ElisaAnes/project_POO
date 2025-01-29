@@ -49,6 +49,33 @@ Tabuleiro::Tabuleiro(QWidget *parent) : QWidget(parent) {
     resize(600, 600);
 }
 
+// Define se esse tabuleiro pode jogar e reseta estado
+void Tabuleiro::setTurnoAtivo(bool ativo) {
+    turnoAtivo = ativo;
+    botaoSelecionado = false; // Reseta a variável para novo turno
+
+    if (turnoAtivo) {
+        setWindowTitle("Seu Turno");
+        for (int i = 0; i < 10; ++i) {
+            for (int j = 0; j < 10; ++j) {
+                botoes[i][j]->setEnabled(true); // Ativa os botões para o turno
+            }
+        }
+    } else {
+        setWindowTitle("Aguardando...");
+        desativarBotoes(); // Desativa os botões quando não for o turno
+    }
+}
+
+// Bloqueia todos os botões do tabuleiro
+void Tabuleiro::desativarBotoes() {
+    for (int i = 0; i < 10; ++i) {
+        for (int j = 0; j < 10; ++j) {
+            botoes[i][j]->setEnabled(false);
+        }
+    }
+}
+
 // Método para marcar o botão correspondente
 void Tabuleiro::marcarBotao(int row, int col) {
     QString estiloAtual = botoes[row][col]->styleSheet(); // Obtém o estilo atual
