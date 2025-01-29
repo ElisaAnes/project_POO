@@ -64,9 +64,13 @@ public:
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
-    Tabuleiro tabuleiro;
-    tabuleiro.show();
+    // Criando duas instâncias do tabuleiro
+    Tabuleiro tabuleiro1;
+    Tabuleiro tabuleiro2;
+
+    // Exibindo as duas janelas separadamente
+    tabuleiro1.show();
+    tabuleiro2.show();
 
     return app.exec();
 }
-/
