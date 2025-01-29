@@ -51,5 +51,23 @@ Tabuleiro::Tabuleiro(QWidget *parent) : QWidget(parent) {
 
 // Método para marcar o botão correspondente
 void Tabuleiro::marcarBotao(int row, int col) {
-    botoes[row][col]->setStyleSheet("background-color: yellow; border-radius: 10px; border: 2px solid black;");
+    botoes[row][col]->setStyleSheet("background-color: yellow; border-radius: 10px; border: 1px solid black;");
+}
+
+// Método para marcar o botão correspondente
+void Tabuleiro::marcarProprio(int row, int col) {
+    QString estiloAtual = botoes[row][col]->styleSheet(); // Pega o estilo atual
+    QString corAtual = "lightgray"; // Valor padrão caso não encontre a cor
+
+    // Expressão regular para encontrar a cor de fundo no estilo atual
+    QRegularExpression regex("background-color:\\s*([^;]+);");
+    QRegularExpressionMatch match = regex.match(estiloAtual);
+
+    if (match.hasMatch()) {
+        corAtual = match.captured(1); // Captura a cor de fundo atual
+    }
+
+    // Define o novo estilo mantendo a cor e alterando apenas a borda
+    QString novoEstilo = QString("background-color: %1; border-radius: 10px; border: 2px solid red;").arg(corAtual);
+    botoes[row][col]->setStyleSheet(novoEstilo);
 }
