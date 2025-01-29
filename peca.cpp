@@ -6,29 +6,29 @@ Peca::Peca(QWidget *parent) : QPushButton(parent) {
     setFocusPolicy(Qt::StrongFocus); // Permite que o widget receba eventos de teclado
 }
 
-//void Peca::mousePressEvent(QMouseEvent *event) {
-    //if (event->button() == Qt::LeftButton) {
-    //    toggleLock(); // Alterna o estado de travamento ao clicar
-    //}
-//}
+void Peca::mousePressEvent(QMouseEvent *event) {
+    if (event->button() == Qt::LeftButton) {
+        toggleLock(); // Alterna o estado de travamento ao clicar
+    }
+}
 
-//void Peca::toggleLock() {
-    //locked = !locked; // Alterna entre travado e destravado
+void Peca::toggleLock() {
+    locked = !locked; // Alterna entre travado e destravado
 
     // Atualiza a cor da peça para indicar o estado (azul = movível, vermelho = travado)
-    //if (locked) {
-    //    setStyleSheet("background-color: red; color: white; border-radius: 10px;");
-    //} else {
-      //  setStyleSheet("background-color: blue; color: white; border-radius: 10px;");
-    //}
-//}
+    if (locked) {
+        setStyleSheet("background-color: red; color: white; border-radius: 10px;");
+    } else {
+        setStyleSheet("background-color: blue; color: white; border-radius: 10px;");
+    }
+}
 
 
 void Peca::keyPressEvent(QKeyEvent *event) {
 
-    //if (locked) {
-    //    return; // Se a peça estiver travada, não faz nada
-   // }
+    if (locked) {
+        return; // Se a peça estiver travada, não faz nada
+    }
 
     switch (event->key()) {
     case Qt::Key_Up:
