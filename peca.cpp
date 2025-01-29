@@ -6,7 +6,30 @@ Peca::Peca(QWidget *parent) : QPushButton(parent) {
     setFocusPolicy(Qt::StrongFocus); // Permite que o widget receba eventos de teclado
 }
 
+//void Peca::mousePressEvent(QMouseEvent *event) {
+    //if (event->button() == Qt::LeftButton) {
+    //    toggleLock(); // Alterna o estado de travamento ao clicar
+    //}
+//}
+
+//void Peca::toggleLock() {
+    //locked = !locked; // Alterna entre travado e destravado
+
+    // Atualiza a cor da peça para indicar o estado (azul = movível, vermelho = travado)
+    //if (locked) {
+    //    setStyleSheet("background-color: red; color: white; border-radius: 10px;");
+    //} else {
+      //  setStyleSheet("background-color: blue; color: white; border-radius: 10px;");
+    //}
+//}
+
+
 void Peca::keyPressEvent(QKeyEvent *event) {
+
+    //if (locked) {
+    //    return; // Se a peça estiver travada, não faz nada
+   // }
+
     switch (event->key()) {
     case Qt::Key_Up:
         if (currentRow > 1) {
@@ -14,8 +37,15 @@ void Peca::keyPressEvent(QKeyEvent *event) {
         }
         break;
     case Qt::Key_Down:
-        if (currentRow < 10) {
-            currentRow++;
+
+        if (isPieceVertical() == true) {
+            if (currentRow < 9) {
+                currentRow++;
+            }
+        } else {
+            if (currentRow < 10) {
+                currentRow++;
+            }
         }
         break;
     case Qt::Key_Left:
@@ -24,8 +54,15 @@ void Peca::keyPressEvent(QKeyEvent *event) {
         }
         break;
     case Qt::Key_Right:
-        if (currentCol < 9) {
-            currentCol++;
+
+        if (isPieceVertical() == true) {
+            if (currentCol < 10) {
+                currentCol++;
+            }
+        } else {
+            if (currentCol < 9) {
+                currentCol++;
+            }
         }
         break;
     case Qt::Key_R:
