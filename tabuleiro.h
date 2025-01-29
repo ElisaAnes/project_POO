@@ -5,6 +5,7 @@
 #include <QGridLayout>
 #include <QPushButton>
 #include <QLabel>
+#include <QRegularExpression>
 #include "peca.h" // Inclui a classe Peca corretamente
 
 class Tabuleiro : public QWidget {
@@ -18,6 +19,7 @@ signals:
 
 public slots:
     void marcarBotao(int row, int col); // Slot para marcar um botão correspondente
+    void marcarProprio(int row, int col);
 
 private:
     QGridLayout *layout;
