@@ -10,10 +10,12 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    battleship.cpp
+    tabuleiro.cpp \
+    peca.cpp
 
 HEADERS += \
-    battleship.h
+    tabuleiro.h \
+    peca.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
