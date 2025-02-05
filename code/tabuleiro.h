@@ -7,16 +7,22 @@
 #include <QLabel>
 #include <QRegularExpression>
 #include <QTimer>
+#include <QDebug>
 #include "peca.h" // Inclui a classe Peca corretamente
 
 class Tabuleiro : public QWidget {
     Q_OBJECT
 
 public:
-    explicit Tabuleiro(QWidget *parent = nullptr);
+    explicit Tabuleiro(Peca *peca, QWidget *parent = nullptr);
 
     void setTurnoAtivo(bool ativo); // Define se esse tabuleiro pode jogar
     void desativarBotoes(); // Bloqueia todos os botões após um clique
+    bool isBotaoClicado() const; // Retorna true se um botão foi clicado
+    void resetarClique(); // Reseta a variável para permitir um novo clique no próximo turno
+    int getLinhaBotao() const; // Retorna a segunda linha se for vertical
+    char getColunaBotao() const; // Retorna a coluna principal da peça
+
 
 signals:
     void buttonClicked(int row, int col); // Sinal emitido quando um botão for clicado
@@ -31,6 +37,9 @@ private:
     Peca *peca; // Ponteiro para a peça vinda de peca.h
     bool turnoAtivo; // Indica se esse tabuleiro pode jogar
     bool botaoSelecionado; // Indica se um botão já foi clicado no turno
+    bool botaoClicado; // Indica se um botão já foi clicado no turno
+    int linha;
+    char coluna;
 };
 
 #endif // TABULEIRO_H

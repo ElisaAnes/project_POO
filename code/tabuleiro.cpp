@@ -1,10 +1,13 @@
 #include "tabuleiro.h"
 
-Tabuleiro::Tabuleiro(QWidget *parent) : QWidget(parent) {
+Tabuleiro::Tabuleiro(Peca *peca, QWidget *parent) : QWidget(parent), peca(peca) {
     layout = new QGridLayout(this);
-    layout->setSpacing(40); // Define o espaçamento entre os botões
+    layout->setSpacing(40);
+    // Define o parent da peça como o tabuleiro
+    peca->setParent(this);
 
-    peca = new Peca(this); // Instancia a peça corretamente a partir de peca.h
+    layout->addWidget(peca, peca->getRow(), peca->getCol(), 1, 2); // Adiciona a peça inicialmente
+
 
     // Adiciona rótulos no topo do tabuleiro (letras de A a J)
     for (int col = 0; col < 10; ++col) {
@@ -28,15 +31,32 @@ Tabuleiro::Tabuleiro(QWidget *parent) : QWidget(parent) {
             botoes[i][j]->setStyleSheet("border-radius: 10px; border: 1px solid black; background-color: lightgray;");
             layout->addWidget(botoes[i][j], i + 1, j + 1);
 
+            // Converte o número da coluna para uma letra (A-J)
+            //char coluna = 'A' + (i);
+            //int linha = j + 1;
+
+            // Exibe a posição da peça no terminal
+            //qDebug() << "Criado os pontos: (" << coluna << "," << linha << ")";
+
             // Conectando o botão ao sinal
             connect(botoes[i][j], &QPushButton::clicked, [this, i, j]() {
-                emit buttonClicked(i, j);
+                if (!botaoClicado) { // Apenas permite um clique por turno
+                    botaoClicado = true;
+
+                    // Converte o número da coluna para uma letra (A-J)
+                    coluna = 'A' + j;
+                    linha = i + 1;
+
+                    qDebug() << "Botão foi clicado em: (" << coluna << "," << linha << ")";
+                    emit buttonClicked(i, j);
+                }
             });
         }
     }
 
+    peca->setPosition(7, 7); // Ajuste conforme necessário
     // Captura `this` na lambda para acessar os membros da classe corretamente
-    connect(peca, &QPushButton::clicked, this, [this]() {
+    connect(peca, &QPushButton::clicked, this, [this, peca]() {
         if (peca->isPieceVertical()) {
             layout->addWidget(peca, peca->getRow(), peca->getCol(), 2, 1);
         } else {
@@ -92,6 +112,7 @@ void Tabuleiro::marcarBotao(int row, int col) {
     // Define o novo estilo mantendo a borda e alterando apenas o background-color
     QString novoEstilo = QString("background-color: yellow; border-radius: 10px; border: 2px solid %1;").arg(corBorda);
     botoes[row][col]->setStyleSheet(novoEstilo);
+
 }
 
 // Método para marcar o botão correspondente
@@ -110,4 +131,22 @@ void Tabuleiro::marcarProprio(int row, int col) {
     // Define o novo estilo mantendo a cor e alterando apenas a borda
     QString novoEstilo = QString("background-color: %1; border-radius: 10px; border: 2px solid red;").arg(corAtual);
     botoes[row][col]->setStyleSheet(novoEstilo);
+}
+
+// Retorna true se um botão foi clicado
+bool Tabuleiro::isBotaoClicado() const {
+    return botaoClicado;
+}
+
+// Reseta a variável de clique no início de cada turno
+void Tabuleiro::resetarClique() {
+    botaoClicado = false;
+}
+
+int Tabuleiro::getLinhaBotao() const {
+    return linha;
+}
+
+char Tabuleiro::getColunaBotao() const {
+    return coluna;
 }

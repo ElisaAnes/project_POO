@@ -16,10 +16,16 @@ public:
     void setPosition(int row, int col) { currentRow = row; currentCol = col; }
     bool isPieceVertical() const;
     bool isLocked() const { return locked; } // Verifica se a peça está travada
+    void imprimirPosicaoClique(int row, int col); // Imprime a posição do clique
+    int getLinha() const; // Retorna a linha principal da peça
+    int getLinha2() const; // Retorna a segunda linha se for vertical
+    char getColuna() const; // Retorna a coluna principal da peça
+    char getColuna2() const; // Retorna a segunda coluna se for horizontal
+
 
 protected:
-    int currentRow = 6;  // Linha inicial da peça no tabuleiro
-    int currentCol = 6;  // Coluna inicial da peça no tabuleiro
+    int currentRow = 7;  // Linha inicial da peça no tabuleiro
+    int currentCol = 7;  // Coluna inicial da peça no tabuleiro
     bool isVertical = false; // Indica a orientação da peça (horizontal ou vertical)
     bool locked = false; // Indica se a peça está travada
 
@@ -29,6 +35,8 @@ protected:
 
 private:
     void rotatePiece(); // Método para rotacionar a peça ao pressionar "R"
+    int linha, linha2; // Guarda a posição vertical da peça
+    char coluna, coluna2; // Guarda a posição horizontal da peça
 };
 
 #endif // PECA_H

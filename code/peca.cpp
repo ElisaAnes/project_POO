@@ -20,17 +20,17 @@ void Peca::toggleLock() {
         setStyleSheet("background-color: red; color: white; border-radius: 10px;");
 
         // Converte o número da coluna para uma letra (A-J)
-        char coluna = 'A' + (currentCol - 1);
-        int linha = currentRow;
+        coluna = 'A' + (currentCol - 1);
+        linha = currentRow;
 
         // Declara variáveis antes do if para estarem acessíveis após ele
-        char coluna2 = coluna;
-        int linha2 = linha;
+        coluna2 = coluna;
+        linha2 = linha;
 
         if (isPieceVertical() == true) {
-            linha2 = currentRow + 1;
+           linha2 = currentRow + 1;
         }else{
-            coluna2= coluna + 1;
+           coluna2= coluna + 1;
         }
 
         // Exibe a posição da peça no terminal
@@ -106,4 +106,21 @@ void Peca::rotatePiece() {
 // Método para retornar se a peça está vertical ou não
 bool Peca::isPieceVertical() const {
     return isVertical;
+}
+
+// Métodos para obter as posições da peça
+int Peca::getLinha() const{
+    return linha;
+}
+
+int Peca::getLinha2() const{
+    return linha2;
+}
+
+char Peca::getColuna() const{
+    return coluna;
+}
+
+char Peca::getColuna2() const{
+    return coluna2;
 }
