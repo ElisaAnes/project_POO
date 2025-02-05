@@ -44,6 +44,14 @@ int main(int argc, char *argv[]) {
 
         // **2. Conectar apenas os eventos do jogador ativo**
         if (turnoJogador1) {
+
+            if(acertos2 == 2) {
+                qDebug() << "Fim de jogo! O Jogador 2 venceu!";
+                QApplication::quit();
+            }else{
+                qDebug() << "Vez do Jogador 1:";
+            }
+
             if((tabuleiro2.getLinhaBotao() == peca1.getLinha() && tabuleiro2.getColunaBotao() == peca1.getColuna()) || (tabuleiro2.getLinhaBotao() == peca1.getLinha2() && tabuleiro2.getColunaBotao() == peca1.getColuna2())){
                 qDebug() << "Acertou o navio!";
                 acertos1 ++;
@@ -53,7 +61,6 @@ int main(int argc, char *argv[]) {
                 qDebug() << "Número de acertos:" << acertos1;
             };
 
-            qDebug() << "Vez do Jogador 1:";
             tabuleiro1.resetarClique();
             QObject::connect(&tabuleiro1, &Tabuleiro::buttonClicked, &tabuleiro2, &Tabuleiro::marcarBotao);
             QObject::connect(&tabuleiro1, &Tabuleiro::buttonClicked, &tabuleiro1, &Tabuleiro::marcarProprio);
@@ -63,6 +70,14 @@ int main(int argc, char *argv[]) {
             //qDebug() << "Botão main: (" << tabuleiro2.getColunaBotao() << "," << tabuleiro2.getLinhaBotao() << ")";
 
         } else {
+
+            if(acertos1 == 2) {
+                qDebug() << "Fim de jogo! O Jogador 1 venceu!";
+                QApplication::quit();
+            }else{
+                qDebug() << "Vez do Jogador 2:";
+            }
+
             if((tabuleiro1.getLinhaBotao() == peca2.getLinha() && tabuleiro1.getColunaBotao() == peca2.getColuna()) || (tabuleiro1.getLinhaBotao() == peca2.getLinha2() && tabuleiro1.getColunaBotao() == peca2.getColuna2())){
                 qDebug() << "Acertou o navio!";
                 acertos2 ++;
@@ -73,10 +88,11 @@ int main(int argc, char *argv[]) {
                 qDebug() << "Número de acertos:" << acertos2;
             };
 
-            qDebug() << "Vez do Jogador 2:";
+
             tabuleiro2.resetarClique();
             QObject::connect(&tabuleiro2, &Tabuleiro::buttonClicked, &tabuleiro1, &Tabuleiro::marcarBotao);
             QObject::connect(&tabuleiro2, &Tabuleiro::buttonClicked, &tabuleiro2, &Tabuleiro::marcarProprio);
+
 
         }
     });
