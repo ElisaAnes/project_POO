@@ -1,6 +1,6 @@
 #include "tabuleiro.h"
 
-Tabuleiro::Tabuleiro(Peca *peca, QWidget *parent) : QWidget(parent), peca(peca) {
+/*Tabuleiro::Tabuleiro(Peca *peca, QWidget *parent) : QWidget(parent), peca(peca) {
     layout = new QGridLayout(this);
     layout->setSpacing(40);
     // Define o parent da peça como o tabuleiro
@@ -67,6 +67,67 @@ Tabuleiro::Tabuleiro(Peca *peca, QWidget *parent) : QWidget(parent), peca(peca) 
     setLayout(layout);
     setWindowTitle("Tabuleiro");
     resize(600, 600);
+}*/
+
+Tabuleiro::Tabuleiro(std::vector<Peca *> pecas, QWidget *parent) : QWidget(parent), pecas(pecas) {
+    layout = new QGridLayout(this);
+    layout->setSpacing(40);
+
+    // Adiciona cada navio ao tabuleiro
+    for (Peca *peca : pecas) {
+        peca->setParent(this);
+        layout->addWidget(peca, peca->getRow(), peca->getCol(), 1, 2);
+    }
+
+    // Adiciona rótulos no topo do tabuleiro (A-J)
+    for (int col = 0; col < 10; ++col) {
+        QLabel *letra = new QLabel(QString(QChar('A' + col)), this);
+        letra->setAlignment(Qt::AlignCenter);
+        layout->addWidget(letra, 0, col + 1);
+    }
+
+    // Adiciona rótulos na lateral esquerda do tabuleiro (1-10)
+    for (int row = 0; row < 10; ++row) {
+        QLabel *numero = new QLabel(QString::number(row + 1), this);
+        numero->setAlignment(Qt::AlignCenter);
+        layout->addWidget(numero, row + 1, 0);
+    }
+
+    // Criar os botões do tabuleiro (10x10)
+    for (int i = 0; i < 10; ++i) {
+        for (int j = 0; j < 10; ++j) {
+            botoes[i][j] = new QPushButton(this);
+            botoes[i][j]->setFixedSize(20, 20);
+            botoes[i][j]->setStyleSheet("border-radius: 10px; border: 1px solid black; background-color: lightgray;");
+            layout->addWidget(botoes[i][j], i + 1, j + 1);
+
+            connect(botoes[i][j], &QPushButton::clicked, [this, i, j]() {
+                if (!botaoClicado) {
+                    botaoClicado = true;
+                    coluna = 'A' + j;
+                    linha = i + 1;
+                    qDebug() << "Botão clicado em: (" << coluna << "," << linha << ")";
+                    emit buttonClicked(i, j);
+                }
+            });
+        }
+    }
+
+    // Ajuste inicial das peças
+    for (Peca *peca : pecas) {
+        peca->setPosition(7, 7); // Definir posições iniciais
+        connect(peca, &QPushButton::clicked, this, [this, peca]() {
+            if (peca->isPieceVertical()) {
+                layout->addWidget(peca, peca->getRow(), peca->getCol(), 2, 1);
+            } else {
+                layout->addWidget(peca, peca->getRow(), peca->getCol(), 1, 2);
+            }
+        });
+    }
+
+    setLayout(layout);
+    setWindowTitle("Tabuleiro");
+    resize(600, 600);
 }
 
 // Define se esse tabuleiro pode jogar e reseta estado
@@ -85,6 +146,35 @@ void Tabuleiro::setTurnoAtivo(bool ativo) {
         setWindowTitle("Aguardando...");
         desativarBotoes(); // Desativa os botões quando não for o turno
     }
+}
+
+/*
+bool Tabuleiro::isPecaTravada() const {
+    return peca->isLocked();
+}
+*/
+
+// Verifica se todos os navios estão travados
+bool Tabuleiro::isPecasTravadas() const {
+    for (const Peca *peca : pecas) {
+        if (!peca->isLocked()) {
+            return false;
+        }
+    }
+    return true;
+}
+/*
+// Verifica se um tiro acertou um dos navios
+bool Tabuleiro::verificarAcerto(const Peca &peca) const {
+    return (linha == peca.getLinha() && coluna == peca.getColuna()) ||
+           (linha == peca.getLinha2() && coluna == peca.getColuna2());
+}
+*/
+
+// Verifica se um tiro acertou um dos navios
+bool Tabuleiro::verificarAcerto(const Peca &peca) const {
+    return (linha == peca.getLinha() && coluna == peca.getColuna()) ||
+           (linha == peca.getLinha2() && coluna == peca.getColuna2());
 }
 
 // Bloqueia todos os botões do tabuleiro
