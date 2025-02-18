@@ -101,4 +101,4 @@ void BatalhaNaval::alternarTurno() {
         QObject::connect(tabuleiroAtivo, &Tabuleiro::buttonClicked, tabuleiroOponente, &Tabuleiro::marcarBotao);
         QObject::connect(tabuleiroAtivo, &Tabuleiro::buttonClicked, tabuleiroAtivo, &Tabuleiro::marcarProprio);
     }
-}
+}//
