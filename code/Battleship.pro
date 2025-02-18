@@ -10,12 +10,14 @@ CONFIG += c++17
 
 SOURCES += \
     batalhanaval.cpp \
+    jogador.cpp \
     main.cpp \
     tabuleiro.cpp \
     peca.cpp
 
 HEADERS += \
     batalhanaval.h \
+    jogador.h \
     tabuleiro.h \
     peca.h
 

@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>bomba.png</file>    
         <file>agua.png</file>
+	<file>atingido.png</file>
     </qresource>
 </RCC>

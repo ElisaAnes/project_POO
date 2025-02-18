@@ -5,45 +5,43 @@
 #include <QGridLayout>
 #include <QPushButton>
 #include <QLabel>
-#include <QRegularExpression>
-#include <QTimer>
-#include <QDebug>
-#include "peca.h" // Inclui a classe Peca corretamente
+#include <vector>
+#include "peca.h"
 
 class Tabuleiro : public QWidget {
     Q_OBJECT
 
 public:
-    //explicit Tabuleiro(Peca *peca, QWidget *parent = nullptr);
     explicit Tabuleiro(std::vector<Peca *> pecas, QWidget *parent = nullptr);
 
-    void setTurnoAtivo(bool ativo); // Define se esse tabuleiro pode jogar
-    void desativarBotoes(); // Bloqueia todos os botões após um clique
-    bool isBotaoClicado() const; // Retorna true se um botão foi clicado
-    void resetarClique(); // Reseta a variável para permitir um novo clique no próximo turno
-    int getLinhaBotao() const; // Retorna a segunda linha se for vertical
-    char getColunaBotao() const; // Retorna a coluna principal da peça
-    bool isPecaTravada() const; // Adicionada para verificar se a peça foi travada
-    bool isPecasTravadas() const; // Verifica se todos os navios estão travados
+    int getLinhaBotao() const;
+    char getColunaBotao() const;
+    QPushButton* getBotao(int linha, int coluna);
 
-    bool verificarAcerto(const Peca &peca) const; // Verifica se um tiro acertou um navio
-
+    void setTurnoAtivo(bool ativo);
+    void desativarBotoes();
+    bool isBotaoClicado() const;
+    void resetarClique();
+    bool isPecasTravadas() const;
+    bool verificarAcerto(const Peca &peca) const;
+    QGridLayout* getLayout() { return layout; }
+    std::vector<Peca *> getNavios() const { return pecas; }
 
 signals:
-    void buttonClicked(int row, int col); // Sinal emitido quando um botão for clicado
+    void buttonClicked(int row, int col);
 
 public slots:
-    void marcarBotao(int row, int col); // Slot para marcar um botão correspondente
+    void marcarBotao(int row, int col);
     void marcarProprio(int row, int col);
 
 private:
     QGridLayout *layout;
-    QPushButton *botoes[10][10]; // Armazena os botões do tabuleiro
-    //Peca *peca; // Ponteiro para a peça vinda de peca.h
+    QPushButton *botoes[10][10];
     std::vector<Peca *> pecas;
-    bool turnoAtivo; // Indica se esse tabuleiro pode jogar
-    bool botaoSelecionado; // Indica se um botão já foi clicado no turno
-    bool botaoClicado; // Indica se um botão já foi clicado no turno
+
+
+    bool turnoAtivo;
+    bool botaoClicado;  // 🔹 Substituindo 'botaoSelecionado' por 'botaoClicado'
     int linha;
     char coluna;
 };
