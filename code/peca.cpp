@@ -40,6 +40,10 @@ void Peca::toggleLock() {
     }
 }
 
+//void Peca::move(int dx, int dy){
+
+//}
+
 
 void Peca::keyPressEvent(QKeyEvent *event) {
 
@@ -49,12 +53,14 @@ void Peca::keyPressEvent(QKeyEvent *event) {
 
     switch (event->key()) {
     case Qt::Key_Up:
+
+        //move(0,-1);
         if (currentRow > 1) {
             currentRow--;
         }
         break;
     case Qt::Key_Down:
-
+        //move(0,1);
         if (isPieceVertical() == true) {
             if (currentRow < 9) {
                 currentRow++;
