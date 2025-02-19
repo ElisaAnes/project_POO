@@ -9,26 +9,29 @@ BatalhaNaval::BatalhaNaval(QObject *parent)
     turnoJogador1(true),
     fasePosicionamento(true)
 {
-    // Certifique-se de inicializar os tabuleiros
+    // 🔹 Criando os tabuleiros antes de configurar o posicionamento
     tabuleiro1 = new Tabuleiro({&peca1_1, &peca1_2, &peca1_3});
     tabuleiro2 = new Tabuleiro({&peca2_1, &peca2_2, &peca2_3});
 
-    if (!tabuleiro1 || !tabuleiro2) {
-        qDebug() << "Erro: Falha ao inicializar os tabuleiros!";
-        return;
-    }
-
+    // 🔹 Define o título das janelas
     tabuleiro1->setWindowTitle("Tabuleiro do Jogador 1");
     tabuleiro2->setWindowTitle("Tabuleiro do Jogador 2");
 
-    tabuleiro1->setTurnoAtivo(turnoJogador1);
-    tabuleiro2->setTurnoAtivo(!turnoJogador1);
+    // 🔹 O jogador 1 começa
+    tabuleiro1->setTurnoAtivo(true);
+    tabuleiro2->setTurnoAtivo(false);
 
+    // 🔹 Mostra apenas o tabuleiro do jogador 1 no início
     tabuleiro1->show();
-    tabuleiro2->show();
+    tabuleiro2->hide(); // 🔹 O jogador 2 não pode ver o tabuleiro do jogador 1
 
+    // 🔹 Configura a fase de posicionamento (jogador 1 primeiro)
+    configurarPosicionamento();
+
+    // 🔹 Configura o jogo após a fase de posicionamento estar concluída
     configurarJogo();
 }
+
 void BatalhaNaval::configurarJogo() {
     connect(&turnoTimer, &QTimer::timeout, this, &BatalhaNaval::alternarTurno);
     turnoTimer.start(10000);
@@ -149,3 +152,51 @@ void BatalhaNaval::mostrarImagem(Tabuleiro *tabuleiro, const QString &caminhoIma
         imagemLabel->deleteLater();
     });
 }
+
+void BatalhaNaval::configurarPosicionamento() {
+    // 🔹 Criando botão para o jogador 1
+    botaoPosicionarJogador1 = new QPushButton("Navios Posicionados", tabuleiro1);
+    botaoPosicionarJogador1->setGeometry(250, 550, 200, 50);
+    botaoPosicionarJogador1->show();
+
+    connect(botaoPosicionarJogador1, &QPushButton::clicked, this, [this]() {
+        qDebug() << "Jogador 1 terminou o posicionamento!";
+        esconderNavios(tabuleiro1);
+        botaoPosicionarJogador1->hide();
+        tabuleiro1->hide();  // 🔹 Esconde o tabuleiro do jogador 1
+
+        // 🔹 Agora exibe o tabuleiro do jogador 2
+        tabuleiro2->show();
+        botaoPosicionarJogador2->show();
+    });
+
+    // 🔹 Criando botão para o jogador 2
+    botaoPosicionarJogador2 = new QPushButton("Navios Posicionados", tabuleiro2);
+    botaoPosicionarJogador2->setGeometry(250, 550, 200, 50);
+    botaoPosicionarJogador2->hide(); // 🔹 Só será mostrado depois do jogador 1 terminar
+
+    connect(botaoPosicionarJogador2, &QPushButton::clicked, this, [this]() {
+        qDebug() << "Jogador 2 terminou o posicionamento!";
+        esconderNavios(tabuleiro2);
+        botaoPosicionarJogador2->hide();
+        tabuleiro2->hide();  // 🔹 Esconde o tabuleiro do jogador 2
+
+        // 🔹 Agora inicia o jogo (mostra novamente os tabuleiros)
+        tabuleiro1->show();
+        tabuleiro2->show();
+
+        fasePosicionamento = false;  // 🔹 Começa a batalha
+        turnoJogador1 = true;
+        turnoTimer.start(10000);
+    });
+
+    // 🔹 Começa mostrando apenas o tabuleiro do jogador 1
+    tabuleiro2->hide();
+}
+
+void BatalhaNaval::esconderNavios(Tabuleiro *tabuleiro) {
+    for (Peca *peca : tabuleiro->getNavios()) {
+        peca->hide();  // 🔹 Apenas esconde os navios
+    }
+}
+

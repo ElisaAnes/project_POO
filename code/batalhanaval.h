@@ -22,6 +22,12 @@ private:
     Tabuleiro *tabuleiro1;
     Tabuleiro *tabuleiro2;
 
+    QPushButton *botaoPosicionarJogador1;
+    QPushButton *botaoPosicionarJogador2;
+
+    void configurarPosicionamento();
+    void esconderNavios(Tabuleiro *tabuleiro);
+
     int acertos1;
     int acertos2;
 
