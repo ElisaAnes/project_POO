@@ -9,12 +9,16 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    batalhanaval.cpp \
     jogador.cpp \
     main.cpp \
+    tabuleiro.cpp \
     peca.cpp
 
 HEADERS += \
+    batalhanaval.h \
     jogador.h \
+    tabuleiro.h \
     peca.h
 
 # Default rules for deployment.
