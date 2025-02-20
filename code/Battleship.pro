@@ -1,4 +1,4 @@
-QT       += core gui network
+QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -9,20 +9,12 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    batalhanaval.cpp \
-    cliente.cpp \
     jogador.cpp \
     main.cpp \
-    servidor.cpp \
-    tabuleiro.cpp \
     peca.cpp
 
 HEADERS += \
-    batalhanaval.h \
-    cliente.h \
     jogador.h \
-    servidor.h \
-    tabuleiro.h \
     peca.h
 
 # Default rules for deployment.
