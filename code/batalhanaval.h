@@ -6,6 +6,9 @@
 #include <QTimer>
 #include <QLabel>
 #include <QDebug>
+#include <QObject>
+#include "servidor.h"
+#include "cliente.h"
 #include "peca.h"
 #include "tabuleiro.h"
 
@@ -14,8 +17,17 @@ class BatalhaNaval : public QObject {
 
 public:
     explicit BatalhaNaval(QObject *parent = nullptr);
+    void iniciarJogo();
 
 private:
+    Servidor *servidor;
+    Cliente *cliente;
+    bool souServidor;
+
+    void iniciarJogoComoServidor();
+    void iniciarJogoComoCliente(QString enderecoIP, quint16 porta);
+    void processarMensagemRecebida(QString mensagem);
+
     Peca peca1_1, peca1_2, peca1_3;
     Peca peca2_1, peca2_2, peca2_3;
 

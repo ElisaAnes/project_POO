@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -10,14 +10,18 @@ CONFIG += c++17
 
 SOURCES += \
     batalhanaval.cpp \
+    cliente.cpp \
     jogador.cpp \
     main.cpp \
+    servidor.cpp \
     tabuleiro.cpp \
     peca.cpp
 
 HEADERS += \
     batalhanaval.h \
+    cliente.h \
     jogador.h \
+    servidor.h \
     tabuleiro.h \
     peca.h
 

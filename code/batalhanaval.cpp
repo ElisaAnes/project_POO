@@ -1,3 +1,4 @@
+/*
 #include "batalhanaval.h"
 
 BatalhaNaval::BatalhaNaval(QObject *parent)
@@ -199,4 +200,44 @@ void BatalhaNaval::esconderNavios(Tabuleiro *tabuleiro) {
         peca->hide();  // 🔹 Apenas esconde os navios
     }
 }
+*/
+#include "batalhanaval.h"
+#include <QInputDialog>
+#include <QDebug>
+
+BatalhaNaval::BatalhaNaval(QObject *parent) : QObject(parent), servidor(nullptr), cliente(nullptr), souServidor(false) {}
+
+void BatalhaNaval::iniciarJogo() {
+    QString escolha = QInputDialog::getItem(nullptr, "Escolha o modo de jogo",
+                                            "Modo:", {"Servidor", "Cliente"}, 0, false);
+
+    if (escolha == "Servidor") {
+        iniciarJogoComoServidor();
+    } else {
+        QString enderecoIP = QInputDialog::getText(nullptr, "Conectar ao Servidor",
+                                                   "Digite o IP do servidor:");
+        iniciarJogoComoCliente(enderecoIP, 12345);
+    }
+}
+
+void BatalhaNaval::iniciarJogoComoServidor() {
+    servidor = new Servidor(this);
+    connect(servidor, &Servidor::mensagemRecebida, this, &BatalhaNaval::processarMensagemRecebida);
+    servidor->iniciarServidor(12345);
+    souServidor = true;
+    qDebug() << "Jogo iniciado como Servidor.";
+}
+
+void BatalhaNaval::iniciarJogoComoCliente(QString enderecoIP, quint16 porta) {
+    cliente = new Cliente(this);
+    connect(cliente, &Cliente::mensagemRecebida, this, &BatalhaNaval::processarMensagemRecebida);
+    cliente->conectarAoServidor(enderecoIP, porta);
+    souServidor = false;
+    qDebug() << "Jogo iniciado como Cliente.";
+}
+
+void BatalhaNaval::processarMensagemRecebida(QString mensagem) {
+    qDebug() << "Mensagem recebida pelo jogo:" << mensagem;
+}
+
 
